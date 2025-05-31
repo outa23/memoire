@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCare Pro - Prendre Rendez-vous</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2980b9;
+      padding: 0.4rem 0.8rem;
+      background: #fff;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      background: rgba(41,128,185,0.1);
+    }
+    main {
+      margin-top: 120px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(255,255,255,0.95);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #4e54c8;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      transition: border-color 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #4e54c8;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(78,84,200,0.2);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    footer {
+      background: #2c3e50;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">🚗 AutoCare Pro</div>
+      <ul class="nav-links">
+        <li><a href="accueil.html">Accueil</a></li>
+        <li><a href="rendez-vous.html" class="active">Rendez-vous</a></li>
+        <li><a href="domicile.html">Service Domicile</a></li>
+        <li><a href="boutique.html">Boutique & Réparation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📅 Prendre Rendez-vous</h2>
+    <form id="appointmentForm">
+      <div class="form-group">
+        <label for="nom">Nom complet</label>
+        <input type="text" id="nom" required>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Téléphone</label>
+        <input type="tel" id="telephone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Service souhaité</label>
+        <select id="service" required>
+          <option value="">Choisir un service</option>
+          <option value="lavage_premium">Lavage Premium</option>
+          <option value="reparation_mecanique">Réparation Mécanique</option>
+          <option value="changement_pneus">Changement Pneus</option>
+          <option value="electronique_auto">Électronique Auto</option>
+          <option value="autre">Autre (préciser dans commentaires)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Date souhaitée</label>
+        <input type="date" id="date" required>
+      </div>
+      <div class="form-group">
+        <label for="heure">Heure souhaitée</label>
+        <select id="heure" required>
+          <option value="">Choisir</option>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="vehicule">Type de véhicule</label>
+        <input type="text" id="vehicule" required>
+      </div>
+      <div class="form-group">
+        <label for="commentaires">Commentaires</label>
+        <textarea id="commentaires" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn">🚀 Confirmer</button>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 AutoCare Pro. Tous droits réservés.
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAM01_98oExoYmW-849MO9QLm63mRkEbhU",
+      authDomain: "site-lavage.firebaseapp.com",
+      projectId: "site-lavage",
+      storageBucket: "site-lavage.firebasestorage.app",
+      messagingSenderId: "1001282145985",
+      appId: "1:1001282145985:web:f16e0d2ea0467d6c6bce40"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nom = document.getElementById('nom').value;
+      const telephone = document.getElementById('telephone').value;
+      const email = document.getElementById('email').value;
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const heure = document.getElementById('heure').value;
+      const vehicule = document.getElementById('vehicule').value;
+      const commentaires = document.getElementById('commentaires').value;
+
+      try {
+        console.log("Tentative d'envoi des données...");
+        await addDoc(collection(db, "appointments"), {
+          nom,
+          telephone,
+          email,
+          service, 
+          date,
+          heure,
+          vehicule,
+          commentaires,
+          statut: "attente"
+        });
+        console.log("Les données ont été envoyées avec succès !");
+        alert("Merci ! Votre demande de rendez-vous a été enregistrée.");
+        e.target.reset();
+      } catch (error) {
+        console.error("Erreur lors de l'enregistrement :", error);
+        alert("Une erreur est survenue lors de l'enregistrement. Veuillez réessayer.");
+      }
+    });
+
+    function setMinDate() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('date').setAttribute('min', today);
+    }
+
+    document.addEventListener('DOMContentLoaded', setMinDate);
+  </script>
+</body>
+</html>
+
+

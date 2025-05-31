@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCare Pro - Notre Équipe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        
+header {
+    background: white;
+    padding: 0.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    background: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links a {
+    color: #2980b9;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(41, 128, 185, 0.1);
+    transform: translateY(-2px);
+}
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-section {
+            margin-bottom: 3rem;
+        }
+
+        .team-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card p.role {
+            font-size: 1.1rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p.description {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    color: #3498db;
+}
+
+.footer-section p,
+.footer-section li {
+    color: #bdc3c7;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #3498db;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #34495e;
+    color: #95a5a6;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🚗 AutoCare Pro</div>
+            <ul class="nav-links">
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="rendez-vous.html">Rendez-vous</a></li>
+                <li><a href="domicile.html">Service Domicile</a></li>
+                <li><a href="boutique.html">Boutique & Réparation</a></li>
+                
+                
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page">
+            <div class="hero">
+                <h1>Rencontrez Notre Équipe</h1>
+                <p>Nos professionnels dévoués à votre service pour un entretien automobile d'excellence</p>
+            </div>
+
+            
+            <div class="team-section">
+                <h2>Équipe d'Accueil</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="peracc2.png" alt="Marie Lefèvre">
+                        <h3>Marie Lefèvre</h3>
+                        <p class="role">Responsable Accueil</p>
+                        <p class="description">Gère les réservations et assure un accueil chaleureux pour tous nos clients.</p>
+                        
+                    </div>
+                    <div class="team-card">
+                        <img src="peracc1.png" alt="Claire Dubois">
+                        <h3>Claire Dubois</h3>
+                        <p class="role">Assistante Accueil</p>
+                        <p class="description">Coordonne les rendez-vous et répond à vos questions avec le sourire.</p>
+                       
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="team-section">
+                <h2>Mécaniciens</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="mec1.jpg" alt="Sophie Martin">
+                        <h3>Sophie Martin</h3>
+                        <p class="role">Mécanicienne Senior</p>
+                        <p class="description">Spécialiste en diagnostic et réparation de véhicules avec 15 ans d'expérience.</p>
+                        
+                    </div>
+                    <div class="team-card">
+                        <img src="MEC2.jpg" alt="Luc Renault">
+                        <h3>Luc Renault</h3>
+                        <p class="role">Mécanicien</p>
+                        <p class="description">Expert en électronique automobile et changement de pneus.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="team-section">
+                <h2>Personnel de Lavage</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="Lav1.webp" alt="Jean Dupont">
+                        <h3>Jean Dupont</h3>
+                        <p class="role">Spécialiste Lavage Premium</p>
+                        <p class="description">Expert en nettoyage intérieur et extérieur avec des produits professionnels.</p>
+                        
+                    </div>
+                    <div class="team-card">
+                        <img src="LA2.webp" alt="Ahmed Benali">
+                        <h3>Ahmed Benali</h3>
+                        <p class="role">Spécialiste Service Domicile</p>
+                        <p class="description">Apporte un service de lavage de qualité directement chez vous.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="team-section">
+                <h2>Fournisseur de Pièces</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="Fornisseur.jpg" alt="Paul Berger">
+                        <h3>Paul Berger</h3>
+                        <p class="role">Responsable Fournitures</p>
+                        <p class="description">Gère l'approvisionnement en pièces détachées de qualité pour toutes marques.</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="contact">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AutoCare Pro</h3>
+                <p>Votre partenaire de confiance pour l'entretien automobile depuis 2013.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📍</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="rendez-vous.html">Lavage Premium</a></li>
+                    <li><a href="domicile.html">Service Domicile</a></li>
+                    <li><a href="boutique.html">Pièces & Réparation</a></li>
+                    <li><a href="programme.html">Programme du Jour</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 123 Avenue de la République, Annaba</p>
+                <p>📞 +213 657832413</p>
+                <p>✉️ contact@autocarepro.dz</p>
+                <p>🕒 Lun-Sam: 8h-18h</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#a-propos">À Propos</a></li>
+                    <li><a href="#temoignages">Témoignages</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AutoCare Pro. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('.team-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, Math.random() * 500);
+            });
+        }
+
+        
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

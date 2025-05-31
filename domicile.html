@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCare Pro - Service Domicile</title>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            background: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links a {
+            color: #2980b9;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.95rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(41,128,185,0.1);
+            transform: translateY(-2px);
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .modern-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .modern-form h2 {
+            text-align: center;
+            color: #4e54c8;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+            font-size: 0.95rem;
+        }
+
+        .btn-modern {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🚗 AutoCare Pro</div>
+            <ul class="nav-links">
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="prendrerndv.html">Rendez-vous</a></li>
+                <li><a href="domicile.html" class="active">Service Domicile</a></li>
+                <li><a href="boutique.html">Boutique & Réparation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page">
+            <div class="hero">
+                <h3>Nous venons chez vous !</h3>
+                <p>Service professionnel à votre domicile ou bureau</p>
+            </div>
+
+            <form id="domicileForm" class="modern-form">
+                <h2>🏠 Service de Lavage à Domicile</h2>
+
+                <div class="form-group">
+                    <label for="nom-dom">Nom complet</label>
+                    <input type="text" id="nom-dom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone-dom">Téléphone</label>
+                    <input type="tel" id="telephone-dom" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">Adresse complète</label>
+                    <textarea id="adresse" name="adresse" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="date-dom">Date souhaitée</label>
+                    <input type="date" id="date-dom" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="creneau">Créneau horaire</label>
+                    <select id="creneau" name="creneau" required>
+                        <option value="">Choisir un créneau</option>
+                        <option value="matin">Matin (8h-12h)</option>
+                        <option value="apres-midi">Après-midi (14h-18h)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="service-dom">Type de service</label>
+                    <select id="service-dom" name="service" required>
+                        <option value="">Choisir un service</option>
+                        <option value="lavage-exterieur">Lavage Extérieur (30€)</option>
+                        <option value="lavage-complet">Lavage Complet (45€)</option>
+                        <option value="nettoyage-premium">Nettoyage Premium (60€)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nb-vehicules">Nombre de véhicules</label>
+                    <select id="nb-vehicules" name="nb-vehicules" required>
+                        <option value="1">1 véhicule</option>
+                        <option value="2">2 véhicules</option>
+                        <option value="3">3 véhicules</option>
+                        <option value="plus">Plus de 3</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-modern">🚀 Demander un Devis</button>
+            </form>
+        </div>
+    </main>
+
+   
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAM01_98oExoYmW-849MO9QLm63mRkEbhU",
+            authDomain: "site-lavage.firebaseapp.com",
+            projectId: "site-lavage",
+            storageBucket: "site-lavage.firebasestorage.app",
+            messagingSenderId: "1001282145985",
+            appId: "1:1001282145985:web:f16e0d2ea0467d6c6bce40",
+            measurementId: "G-ZDMWGVNVWQ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.getElementById('domicileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const nom = document.getElementById('nom-dom').value;
+            const telephone = document.getElementById('telephone-dom').value;
+            const adresse = document.getElementById('adresse').value;
+            const date = document.getElementById('date-dom').value;
+            const creneau = document.getElementById('creneau').value;
+            const service = document.getElementById('service-dom').value;
+            const nbVehicules = document.getElementById('nb-vehicules').value;
+
+            try {
+                await addDoc(collection(db, "domicileRequests"), {
+                    nom,
+                    telephone,
+                    adresse,
+                    date,
+                    creneau,
+                    service,
+                    nbVehicules,
+                    timestamp: new Date()
+                });
+                alert('✅ Votre demande a été envoyée avec succès !');
+                this.reset();
+            } catch (error) {
+                console.error('❌ Une erreur est survenue:', error);
+                alert('❌ Une erreur est survenue. Veuillez réessayer.');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date-dom').setAttribute('min', today);
+        });
+    </script>
+</body>
+</html>

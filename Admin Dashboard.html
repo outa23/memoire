@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCare Pro - Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #4e54c8;
+      margin-bottom: 1.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #667eea;
+      color: white;
+    }
+    .btn {
+      padding: 6px 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-right: 5px;
+    }
+    .accept {
+      background: #4ecdc4;
+      color: white;
+    }
+    .refuse {
+      background: #ff6b6b;
+      color: white;
+    }
+    .delete {
+      background: #ff4d4d;
+      color: white;
+    }
+    .status {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .status.attente {
+      background: #ffa726;
+      color: white;
+    }
+    .status.accepte {
+      background: #4ecdc4;
+      color: white;
+    }
+    .status.refuse {
+      background: #ff6b6b;
+      color: white;
+    }
+    input[type="date"], select {
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>AutoCare Pro - Gestion des Rendez-vous</header>
+  <main>
+    <h2>Liste des Rendez-vous</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Téléphone</th>
+          <th>Email</th>
+          <th>Service</th>
+          <th>Date</th>
+          <th>Heure/Créneau</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="appointmentsTable">
+        <tr><td colspan="8">Chargement...</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAM01_98oExoYmW-849MO9QLm63mRkEbhU",
+      authDomain: "site-lavage.firebaseapp.com",
+      projectId: "site-lavage",
+      storageBucket: "site-lavage.firebasestorage.app",
+      messagingSenderId: "1001282145985",
+      appId: "1:1001282145985:web:f16e0d2ea0467d6c6bce40"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function fetchAppointments() {
+      const table = document.getElementById('appointmentsTable');
+      table.innerHTML = '<tr><td colspan="8">Chargement...</td></tr>';
+      try {
+        const appointmentsSnapshot = await getDocs(collection(db, "appointments"));
+        const domicileSnapshot = await getDocs(collection(db, "domicileRequests"));
+        table.innerHTML = '';
+
+        let hasData = false;
+
+        
+        appointmentsSnapshot.forEach((docSnap) => {
+          hasData = true;
+          const data = docSnap.data();
+          const statut = data.statut || 'attente';
+          const row = `
+            <tr>
+              <td>${data.nom || '-'}</td>
+              <td>${data.telephone || '-'}</td>
+              <td>${data.email || '-'}</td>
+              <td>${data.service || 'Lavage Premium'}</td>
+              <td>
+                <input type="date" value="${data.date || ''}" 
+                       onchange="updateField('appointments', '${docSnap.id}', 'date', this.value)">
+              </td>
+              <td>
+                <select onchange="updateField('appointments', '${docSnap.id}', 'heure', this.value)">
+                  ${generateTimeOptions(data.heure)}
+                </select>
+              </td>
+              <td><span class="status ${statut}">${statut.charAt(0).toUpperCase() + statut.slice(1)}</span></td>
+              <td>
+                <button class="btn accept" onclick="updateStatus('appointments', '${docSnap.id}', 'accepte')">Accepter</button>
+                <button class="btn refuse" onclick="updateStatus('appointments', '${docSnap.id}', 'refuse')">Refuser</button>
+                <button class="btn delete" onclick="deleteAppointment('appointments', '${docSnap.id}')">🗑️ Supprimer</button>
+              </td>
+            </tr>
+          `;
+          table.innerHTML += row;
+        });
+
+        
+        domicileSnapshot.forEach((docSnap) => {
+          hasData = true;
+          const data = docSnap.data();
+          const statut = data.statut || 'attente';
+          const row = `
+            <tr>
+              <td>${data.nom || '-'}</td>
+              <td>${data.telephone || '-'}</td>
+              <td>${data.email || '-'}</td>
+              <td>Service à Domicile</td>
+              <td>
+                <input type="date" value="${data.date || ''}" 
+                       onchange="updateField('domicileRequests', '${docSnap.id}', 'date', this.value)">
+              </td>
+              <td>
+                <select onchange="updateField('domicileRequests', '${docSnap.id}', 'creneau', this.value)">
+                  ${generateTimeOptions(data.creneau)}
+                </select>
+              </td>
+              <td><span class="status ${statut}">${statut.charAt(0).toUpperCase() + statut.slice(1)}</span></td>
+              <td>
+                <button class="btn accept" onclick="updateStatus('domicileRequests', '${docSnap.id}', 'accepte')">Accepter</button>
+                <button class="btn refuse" onclick="updateStatus('domicileRequests', '${docSnap.id}', 'refuse')">Refuser</button>
+                <button class="btn delete" onclick="deleteAppointment('domicileRequests', '${docSnap.id}')">🗑️ Supprimer</button>
+              </td>
+            </tr>
+          `;
+          table.innerHTML += row;
+        });
+
+        if (!hasData) {
+          table.innerHTML = '<tr><td colspan="8">Aucune demande trouvée.</td></tr>';
+        }
+
+      } catch (error) {
+        console.error("Erreur lors du chargement:", error);
+        table.innerHTML = '<tr><td colspan="8">Erreur lors du chargement des données.</td></tr>';
+      }
+    }
+
+    window.updateStatus = async (collectionName, id, status) => {
+      try {
+        const ref = doc(db, collectionName, id);
+        await updateDoc(ref, { statut: status });
+        alert(`Statut mis à jour: ${status}`);
+        fetchAppointments();
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour:", error);
+        alert("Erreur lors de la mise à jour.");
+      }
+    };
+
+    window.updateField = async (collectionName, id, field, value) => {
+      try {
+        const ref = doc(db, collectionName, id);
+        await updateDoc(ref, { [field]: value });
+        console.log(`Champ mis à jour: ${field} => ${value}`);
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour du champ:", error);
+        alert("Erreur lors de la mise à jour.");
+      }
+    };
+
+    window.deleteAppointment = async (collectionName, id) => {
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce rendez-vous ?")) {
+        try {
+          await deleteDoc(doc(db, collectionName, id));
+          alert("Rendez-vous supprimé.");
+          fetchAppointments();
+        } catch (error) {
+          console.error("Erreur lors de la suppression:", error);
+          alert("Erreur lors de la suppression.");
+        }
+      }
+    };
+
+    function generateTimeOptions(selectedTime) {
+      const times = ['08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+      return times.map(time => 
+        `<option value="${time}" ${time === selectedTime ? 'selected' : ''}>${time}</option>`
+      ).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchAppointments);
+  </script>
+</body>
+</html>
